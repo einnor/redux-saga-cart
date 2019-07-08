@@ -13,3 +13,8 @@ export function* loadItemDetails(item){
     const info = data[0];
     yield put(setItemDetails(info));
 }
+
+export function* itemDetailsSaga() {
+    const { items } = yield take(SET_CART_ITEMS);
+    yield items.map(item=>fork(loadItemDetails,item));
+}
